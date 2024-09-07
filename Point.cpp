@@ -69,7 +69,7 @@ std::ostream& operator<<(std::ostream& out, const Point& point) {
 int main() {
     Point p;
 
-    std::cout << p << std::endl;    
+    std::cout << p << std::endl;
 
     return 0;
 }
