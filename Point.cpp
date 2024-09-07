@@ -1,53 +1,75 @@
 #include <iostream>
 #include <cmath>
 
-struct Point {
-    int x;
-    int y;
+class Point {
+    private:
+        // Attributes
+        int x;
+        int y;
 
-    double distance(const struct Point& other) const {
-        return hypot(this->x-other.x, this->y-other.y);
-    }
+    public:
+        // Constructors
+        Point() {
+            this->x = 0;
+            this->y = 0;
+        }
 
-    bool operator==(const struct Point& other) const {
-        return this->x == other.x && this->y == other.y;
-    }
+        Point(int x, int y) {
+            this->x = x;
+            this->y = y;
+        }
 
-    bool operator!=(const struct Point& other) const {
-        return !((*this) == other);
-    }
+        // Getters / Accessors
+        int getX() const {
+            return this->x;
+        }
 
-    struct Point operator+(const struct Point& other) const {
-        struct Point sum = {this->x+other.x, this->y+other.y};
-        return sum;
-    }
+        int getY() const {
+            return this->y;
+        }
 
-    struct Point operator-(const struct Point& other) const {
-        struct Point diff = {this->x-other.x, this->y-other.y};
-        return diff;
-    }
+        // Setters / Mutators
+        void setX(int value) {
+            this->x = value;
+        }
+
+        void setY(int value) {
+            this->y = value;
+        }
+
+        // Methods
+        double distance(const Point& other) const {
+            return hypot(this->x-other.x, this->y-other.y);
+        }
+
+        bool operator==(const Point& other) const {
+            return this->x == other.x && this->y == other.y;
+        }
+
+        bool operator!=(const Point& other) const {
+            return !((*this) == other);
+        }
+
+        Point operator+(const Point& other) const {
+            return Point(this->x+other.x, this->y+other.y);
+        }
+
+        Point operator-(const Point& other) const {
+            return Point(this->x-other.x, this->y-other.y);
+        }
+
+        friend std::ostream& operator<<(std::ostream& out, const Point& point);
 };
 
-
-std::ostream& operator<<(std::ostream& out, const struct Point& point) {
+std::ostream& operator<<(std::ostream& out, const Point& point) {
     out << "(" << point.x << ", " << point.y << ")";
     return out;
 }
 
-
 int main() {
-    struct Point a = {1, 10};
-    struct Point b = {2, 5};
+    Point p;
 
-    std::cout << std::boolalpha << (a==b) << std::endl;
-    std::cout << std::boolalpha << (a!=b) << std::endl;
-
-    std::cout << a << std::endl;
-    std::cout << b << std::endl;
-    std::cout << a+b << std::endl;
-    std::cout << a-b << std::endl;
-
-    std::cout << a.distance(b) << std::endl;
+    std::cout << p << std::endl;    
 
     return 0;
 }
